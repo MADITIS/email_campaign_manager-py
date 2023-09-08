@@ -47,3 +47,29 @@ def add_subscriber(request: HttpRequest, campaign_id) -> JsonResponse:
         return JsonResponse({'message': 'Invalid data', "data": data}, status=400)
     else:
         return JsonResponse({'message': 'Method not allowed'}, status=405)
+
+
+@csrf_exempt
+def unsubscribe(request, campaign_id):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        email = data.get('email', '')
+
+        if not email:
+            return JsonResponse({'message': 'Email is a required field'}, status=400)
+
+        try:
+            subscriber = Subscriber.objects.get(
+                user__email=email, subscribed_campaigns__id=campaign_id)
+
+            if subscriber.is_active:
+                subscriber.is_active = False
+                subscriber.save()
+
+                return JsonResponse({'message': 'User unsubscribed successfully'})
+            else:
+                return JsonResponse({"Message": "Not Subscribed"})
+        except Subscriber.DoesNotExist:
+            return JsonResponse({'message': 'Subscriber not found'}, status=404)
+
+    return JsonResponse({'message': 'Method not allowed'}, status=405)

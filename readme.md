@@ -72,7 +72,7 @@ POSTGRES_PORT=your_postgres_port  # Optional
 
 #### Usage
 
-To subscribe to a campaign, make a POST request to the `/api/subscribe/<int:campaign_id>/` endpoint with the required parameters.
+To subscribe to a campaign, make a POST request to the `subscribe/<int:campaign_id>/` endpoint with the required parameters.
 
 Example Request:
 ```http
@@ -83,7 +83,7 @@ Content-Type: application/json
   "email": "john@example.com",
   "first_name": "John"
 }
-
+```
 
 ### Unsubscribe from a Campaign
 
@@ -95,7 +95,7 @@ Content-Type: application/json
 
 #### Usage
 
-To unsubscribe from a campaign, make a POST request to the `/api/unsubscribe/<int:campaign_id>/` endpoint with the required parameters.
+To unsubscribe from a campaign, make a POST request to the `unsubscribe/<int:campaign_id>/` endpoint with the required parameters.
 
 Example Request:
 ```http
@@ -105,7 +105,7 @@ Content-Type: application/json
 {
   "email": "john@example.com"
 }
-
+```
 ## Cron Job with django-crontab
 
 ### Starting the Cron Job

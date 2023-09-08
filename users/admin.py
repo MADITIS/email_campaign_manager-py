@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User, Subscriber
 
 
 class CustomUserAdmin(UserAdmin):
@@ -24,3 +24,13 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(User, CustomUserAdmin)
+
+
+@admin.register(Subscriber)
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ('user', 'subscribed_campaigns')
+    list_filter = ('subscribed_campaigns',)
+    search_fields = ('user__email', 'user__first_name')
+
+    def subscribed_campaigns(self, obj):
+        return ", ".join([campaign.subject for campaign in obj.subscribed_campaigns.all()])

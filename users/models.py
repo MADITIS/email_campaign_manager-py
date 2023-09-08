@@ -9,8 +9,8 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('The Email field must be set')
         if not first_name:
             raise ValueError('The First Name field must be set')
-        if password is None:
-            raise ValueError('The Password field must be set')
+        # if password is None:
+        #     raise ValueError('The Password field must be set')
 
         email = self.normalize_email(email)
         user = self.model(email=email, first_name=first_name, **extra_fields)

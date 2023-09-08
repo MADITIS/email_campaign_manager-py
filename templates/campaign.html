@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ campaign.subject }}</title>
+</head>
+<body>
+    <h1>{{ campaign.subject }}</h1>
+    <p>Preview Text: {{ campaign.preview_text }}</p>
+    <p>Article URL: <a href="{{ campaign.article_url }}">{{ campaign.article_url }}</a></p>
+    <p>{{ campaign.html_content | safe }}</p>
+</body>
+</html>

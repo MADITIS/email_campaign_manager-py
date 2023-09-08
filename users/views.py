@@ -5,12 +5,9 @@ from users.models import User, Subscriber
 from campaigns.models import Campaign
 from django.views.decorators.csrf import csrf_exempt
 
-from campaigns.send_mail import send_daily_campaigns
-
 
 @csrf_exempt
 def add_subscriber(request: HttpRequest, campaign_id) -> JsonResponse:
-    send_daily_campaigns()
     if request.method == "POST":
         data = json.loads(request.body.decode('utf-8'))
         first_name: str = data.get("first_name", '')
